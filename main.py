@@ -121,7 +121,7 @@ async def generate_text(request: PromptRequest):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-# Main entry to run FastAPI server
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=5000, log_level="info")
