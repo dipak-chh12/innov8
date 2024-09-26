@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 app = FastAPI()
 
-# Configure CORS
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,17 +18,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure Gemini API Key using environment variable
+
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
 LINKEDIN_ACCESS_TOKEN = "AQU_VKqEd5ygqDVl7LD2qY0WDYEF5MnX33f0E0Erb1KiI-lr0ZFBugVP9YJuyD1QYIkrcixpojh4lDsDJpoCiC50IFE7iNyPyVGy0F8VM98gZNP47RzrZMSL6I6UJj31tjDI5FoQdrIm3xhXgPzMvmafmkHfGHzjFQl7D-y7B2E3t0CyXnhHKb049MybNJ9HzmqIA092l6ZT5ZhcNiI_ma0G9WpafIwbCi23bO_-T75ixqJ-lijdKrCK8Bryov-lzhYlXHBwS3RJ6j22JFLbYHLclT2jYoiKSrKNd6IEwXioXlD-ZxOxxJw0N-HJvYWk0Ti1owDDr2z38QfXpsHPBLdqDYvUpA"
-YOUR_LINKEDIN_ID = "77ano414opxmsa"  # Replace with your LinkedIn ID
+YOUR_LINKEDIN_ID = "77ano414opxmsa"  
 
 class PromptRequest(BaseModel):
     prompt: str
 
-# Function to fetch LinkedIn profile data
+
 def get_linkedin_profile():
     profile_url = "https://api.linkedin.com/v2/userinfo"
     headers = {
@@ -42,7 +42,7 @@ def get_linkedin_profile():
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch LinkedIn profile data")
 
-# Function to update a post on LinkedIn
+
 def update_linkedin_post(content: str):
     post_url = "https://api.linkedin.com/v2/userinfo"
     headers = {
@@ -69,7 +69,7 @@ def update_linkedin_post(content: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to update post")
 
-# Function to scrape a website for specific text
+
 def scrape_website(url: str, search_text: str):
     response = requests.get(url)
     
@@ -80,7 +80,7 @@ def scrape_website(url: str, search_text: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to scrape website")
 
-# Endpoint for generating text and handling LinkedIn data
+
 @app.post("/api/generate-text")
 async def generate_text(request: PromptRequest):
     try:
@@ -88,7 +88,7 @@ async def generate_text(request: PromptRequest):
         if not prompt:
             raise HTTPException(status_code=400, detail="Prompt is required")
         
-        # Check if the input contains a LinkedIn URL or command for posting/updating
+        
         if "linkedin.com" in prompt:
             linkedin_profile = get_linkedin_profile()
             first_name = linkedin_profile.get("localizedFirstName", 'first_name')
@@ -105,13 +105,13 @@ async def generate_text(request: PromptRequest):
 
         elif prompt.lower().startswith("scrape"):
             parts = prompt.split()
-            url = parts[1]  # Assuming the URL is the second word in the command
-            search_text = ' '.join(parts[2:])  # The rest is the search text
+            url = parts[1]  
+            search_text = ' '.join(parts[2:])  
             
             results = scrape_website(url, search_text)
             return JSONResponse(content=results, status_code=200)
 
-        # For non-LinkedIn prompts, use Gemini API to generate text
+       
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(prompt)
         generated_text = response.text
