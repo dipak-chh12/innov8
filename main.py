@@ -21,7 +21,7 @@ app.add_middleware(
 # Configure Gemini API Key using environment variable
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
-# LinkedIn Access Token (you provided this token)
+
 LINKEDIN_ACCESS_TOKEN = "AQU_VKqEd5ygqDVl7LD2qY0WDYEF5MnX33f0E0Erb1KiI-lr0ZFBugVP9YJuyD1QYIkrcixpojh4lDsDJpoCiC50IFE7iNyPyVGy0F8VM98gZNP47RzrZMSL6I6UJj31tjDI5FoQdrIm3xhXgPzMvmafmkHfGHzjFQl7D-y7B2E3t0CyXnhHKb049MybNJ9HzmqIA092l6ZT5ZhcNiI_ma0G9WpafIwbCi23bO_-T75ixqJ-lijdKrCK8Bryov-lzhYlXHBwS3RJ6j22JFLbYHLclT2jYoiKSrKNd6IEwXioXlD-ZxOxxJw0N-HJvYWk0Ti1owDDr2z38QfXpsHPBLdqDYvUpA"
 YOUR_LINKEDIN_ID = "77ano414opxmsa"  # Replace with your LinkedIn ID
 
