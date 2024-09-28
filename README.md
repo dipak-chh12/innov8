@@ -29,5 +29,9 @@ This will start the server at http://127.0.0.1:8000.
 
 4. Open the Frontend: Open index.html in your web browser to interact with the chatbot.
 
-thanks and have fun with the chatbot✌️
+
+
+### Note
+The project is not deployed because GitHub didn't allow non static website to be deployed. You can test the chatbot via local host using the steps above. Hope you have a good day.
+Thanks and have fun with the chatbot✌️
 ~Team Innov8
