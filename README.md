@@ -20,7 +20,9 @@ This project is a chatbot built using the Gemini 1.5 Flash Model API and FastAPI
 
 3. Run the Backend: Start the FastAPI server by running:
 
+```bash
 uvicorn main:app --reload
+```
 
 This will start the server at http://127.0.0.1:8000.
 
